@@ -1,0 +1,30 @@
+.container {
+  height: 5vh;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.title-bar {
+  height: 7vh;
+  background-color: #107d40;
+}
+.menu-bar {
+  height: 5vh;
+}
+.menu-icon-bar {
+  height: 5vh;
+}
+.formula-bar {
+  height: 6vh;
+}
+.data-container {
+  height: 75vh;
+}
+.body {
+  overflow: hidden;
+}
+.sheet-bar {
+  height: 4vh;
+}
