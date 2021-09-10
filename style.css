@@ -16,7 +16,7 @@
   background-color: #f2f3f1;
 }
 .menu-icon-bar {
-  height: 5vh;
+  height: 6vh;
 }
 .formula-bar {
   height: 6vh;
@@ -43,4 +43,38 @@
 
 .menu-item:hover {
   background-color: #e5e4e2;
+}
+.menu-icon-bar {
+  display: flex;
+  background-color: #f2f3f1;
+  align-items: center;
+}
+.menu-icon {
+  margin-left: 1%;
+  padding: 0.7%;
+}
+.menu-icon:hover {
+  background-color: #e5e4e2;
+  cursor: pointer;
+}
+.selector {
+  height: 70%;
+  width: 11%;
+}
+
+.font-family-selector {
+  position: relative;
+  font-size: 15px;
+}
+.selector option {
+  font-size: 18px;
+}
+.size-selector {
+  height: 30px;
+  width: 55px;
+  font-size: 15px;
+}
+
+.size-selector option {
+  font-size: 16px;
 }
