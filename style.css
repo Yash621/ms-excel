@@ -9,6 +9,11 @@
 .title-bar {
   height: 7vh;
   background-color: #107d40;
+  color: white;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .menu-bar {
   height: 5vh;
