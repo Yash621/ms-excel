@@ -12,6 +12,8 @@
 }
 .menu-bar {
   height: 5vh;
+  display: flex;
+  background-color: #f2f3f1;
 }
 .menu-icon-bar {
   height: 5vh;
@@ -27,4 +29,18 @@
 }
 .sheet-bar {
   height: 4vh;
+}
+.menu-item {
+  position: relative;
+  margin-left: 2%;
+  cursor: pointer;
+  padding: 0.7%;
+}
+.selected {
+  border-bottom: 3px solid #107d40;
+  padding-bottom: 0.5%;
+}
+
+.menu-item:hover {
+  background-color: #e5e4e2;
 }
