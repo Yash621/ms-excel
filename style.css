@@ -21,15 +21,11 @@
 .formula-bar {
   height: 6vh;
 }
-.data-container {
-  height: 75vh;
-}
-.body {
+
+body {
   overflow: hidden;
 }
-.sheet-bar {
-  height: 4vh;
-}
+
 .menu-item {
   position: relative;
   margin-left: 2%;
@@ -77,4 +73,61 @@
 
 .size-selector option {
   font-size: 16px;
+}
+.sheet-bar {
+  background-color: #f4f4f5;
+  height: 7vh;
+  display: flex;
+  align-items: center;
+}
+.data-container {
+  height: 70vh;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.select-all {
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+}
+.column-name-container {
+  width: calc(100vh -30px);
+  height: 30px;
+  border: 1px solid black;
+}
+.row-name-container {
+  width: 30px;
+  width: calc(75vh-30px);
+  border: 1px solid black;
+}
+.input-cell-container {
+  width: calc(100vh-30px);
+  height: calc(75vh-30px);
+  border: 1px solid black;
+}
+.icon-left-scroll,
+.icon-right-scroll {
+  font-size: 30px;
+  cursor: pointer;
+}
+.icon-add {
+  color: #107d40;
+  cursor: pointer;
+  margin-bottom: 0.2%;
+  padding-right: 1%;
+  padding-left: 1%;
+}
+.icon-add:hover {
+  transform: scale(1.2);
+}
+.sheet-tab-container {
+  margin-bottom: 0.3%;
+  padding: 1%;
+  cursor: pointer;
+  border-bottom: 6px solid #107d40;
+  padding-bottom: 0.5%;
+}
+.sheet-tab-container:hover {
+  background-color: #e5e4e2;
 }
