@@ -71,7 +71,7 @@ body {
   font-size: 18px;
 }
 .size-selector {
-  height: 30px;
+  height: 28px;
   width: 55px;
   font-size: 15px;
 }
@@ -94,25 +94,25 @@ body {
 .select-all {
   width: 37px;
   height: 30px;
-  border: 1px solid black;
+  border: 1px solid lightgray;
 }
 .column-name-container {
   width: calc(100% - 37px);
   height: 30px;
-  border: 1px solid black;
+  border: 1px solid lightgray;
   display: flex;
   align-items: center;
 }
 .row-name-container {
   width: 37px;
   height: calc(71vh - 30px);
-  border: 1px solid black;
+  border: 1px solid lightgray;
 }
 
 .input-cell-container {
   width: calc(100% - 37px);
   height: calc(71vh - 30px);
-  border: 1px solid black;
+  border: 1px solid lightgray;
 }
 .icon-left-scroll,
 .icon-right-scroll {
@@ -141,10 +141,27 @@ body {
 }
 .column-name {
   width: 50px;
-  height: 30px;
+  height: 27px;
   display: flex;
   align-items: center;
   margin-left: 2.5%;
   border-right: 2px solid lightgray;
   font-weight: bold;
+}
+.row-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
+  height: 25px;
+}
+.cell-row {
+  display: flex;
+}
+
+.input-cell {
+  width: 82.9px;
+  height: 25px;
+  border-bottom: 1px solid lightgray;
+  border-right: 1px solid lightgray;
 }
