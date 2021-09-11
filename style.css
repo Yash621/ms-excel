@@ -205,3 +205,9 @@ body {
 .img {
   height: 60%;
 }
+.menu-icon.select {
+  background-color: lightgray;
+}
+.sel {
+  border: 2px solid #107d40;
+}

@@ -31,10 +31,23 @@ $(document).ready(function () {
     for (let j = 1; j < 50; j++) {
       let colCode = $(`.colId-${j}`).attr("id").split("-")[1];
       let cell = $(
-        `<div class="input-cell" contenteditable="true" id="row-${i}-col-${j} code-${colCode}"></div>`
+        `<div class="input-cell"  id="row-${i}-col-${j} code-${colCode}"></div>`
       );
 
       $(`#cell-row-${i}`).append(cell);
     }
   }
+  $(".align-icon").click(function () {
+    $(".align-icon.select").removeClass("select");
+    $(this).addClass("select");
+  });
+
+  $(".style-icon").click(function () {
+    $(this).toggleClass("select");
+  });
+
+  $(".input-cell").click(function () {
+    $(".input-cell.sel").removeClass("sel");
+    $(this).addClass("sel");
+  });
 });
