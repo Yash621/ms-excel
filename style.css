@@ -89,6 +89,7 @@ body {
   height: 71vh;
   display: flex;
   flex-wrap: wrap;
+  overflow: hidden;
 }
 
 .select-all {
@@ -140,7 +141,7 @@ body {
   background-color: #e5e4e2;
 }
 .column-name {
-  width: 50px;
+  min-width: 50px;
   height: 27px;
   display: flex;
   align-items: center;
@@ -160,8 +161,11 @@ body {
 }
 
 .input-cell {
-  width: 82.9px;
+  min-width: 82.9px;
   height: 25px;
   border-bottom: 1px solid lightgray;
   border-right: 1px solid lightgray;
+}
+.cell-row {
+  display: flex;
 }
