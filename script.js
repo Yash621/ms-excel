@@ -50,4 +50,11 @@ $(document).ready(function () {
     $(".input-cell.sel").removeClass("sel");
     $(this).addClass("sel");
   });
+
+  $(".input-cell").dblclick(function () {
+    $(".input-cell.sel").removeClass("sel");
+    $(this).addClass("sel");
+    $(this).attr("contenteditable", "true");
+    $(this).focus();
+  });
 });
