@@ -41,8 +41,35 @@ $(document).ready(function () {
     $(this).addClass("select");
   });
 
+  let Bclick = 0;
+  let Iclick = 0;
+  let Uclick = 0;
   $(".style-icon").click(function () {
-    $(this).toggleClass("select");
+    if ($(this).hasClass("icon-bold")) {
+      Bclick++;
+      console.log(Bclick);
+      if (Bclick % 2 === 0) {
+        $(this).removeClass("select");
+      } else {
+        $(this).addClass("select");
+      }
+    }
+    if ($(this).hasClass("icon-italic")) {
+      Iclick++;
+      if (Iclick % 2 == 0) {
+        $(this).removeClass("select");
+      } else {
+        $(this).addClass("select");
+      }
+    }
+    if ($(this).hasClass("icon-underline")) {
+      Uclick++;
+      if (Uclick % 2 == 0) {
+        $(this).removeClass("select");
+      } else {
+        $(this).addClass("select");
+      }
+    }
   });
 
   $(".input-cell").click(function (e) {
@@ -90,10 +117,6 @@ $(document).ready(function () {
     } else {
       $(".input-cell.sel").removeClass("sel");
       $(this).addClass("sel");
-      let [rowId, colId] = getRowCol(this);
-      console.log(rowId, colId);
-      console.log($(this).attr("id"));
-      console.log($(`#row-${rowId}-col-${colId}`).hasClass("sel"));
     }
   });
 
@@ -104,11 +127,36 @@ $(document).ready(function () {
     $(this).focus();
   });
 
+  $(".input-cell").blur(function () {
+    $(".input-cell.sel").attr("contenteditable", "false");
+  });
+
   $(".input-cell-container").scroll(function () {
     $(".column-name-container").scrollLeft(this.scrollLeft);
     $(".row-name-container").scrollTop(this.scrollTop);
   });
-  $(this).addClass("sel");
+
+  $(".icon-bold").click(function () {
+    if ($(this).hasClass("select")) {
+      updateCell("font-weight", "bold");
+    } else {
+      updateCell("font-weight", "");
+    }
+  });
+  $(".icon-italic").click(function () {
+    if ($(this).hasClass("select")) {
+      updateCell("font-style", "italic");
+    } else {
+      updateCell("font-style", "");
+    }
+  });
+  $(".icon-underline").click(function () {
+    if ($(this).hasClass("select")) {
+      updateCell("text-decoration", "underline");
+    } else {
+      updateCell("text-decoration", "");
+    }
+  });
 });
 
 function getRowCol(ele) {
@@ -117,4 +165,9 @@ function getRowCol(ele) {
   let rowId = parseInt(idArray[1]);
   let colId = parseInt(idArray[3]);
   return [rowId, colId];
+}
+function updateCell(property, value) {
+  $(".input-cell.sel").each(function () {
+    $(this).css(property, value);
+  });
 }
