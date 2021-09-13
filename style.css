@@ -216,14 +216,17 @@ body {
 }
 
 .input-cell.top-cell-selected {
-  border-top: 3px solid red;
+  border-top: none;
 }
 .input-cell.bottom-cell-selected {
   border-bottom: 1px solid lightgray;
 }
 .input-cell.left-cell-selected {
-  border-left: 1px solid lightgray;
+  border-left: none;
 }
 .input-cell.right-cell-selected {
   border-right: 1px solid lightgray;
+}
+.input-cell.re {
+  border: 3px solid red;
 }

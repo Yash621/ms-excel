@@ -23,23 +23,22 @@ $(document).ready(function () {
     $(".row-name-container").append(row);
   }
 
-  for (let i = 0; i < 50; i++) {
+  for (let i = 1; i < 50; i++) {
     $(".input-cell-container").append(
       `<div class="cell-row" id="cell-row-${i}"></div>`
     );
 
     for (let j = 1; j < 50; j++) {
       let colCode = $(`.colId-${j}`).attr("id").split("-")[1];
-      let cell = $(
-        `<div class="input-cell"  id="row-${i}-col-${j} code-${colCode}"></div>`
-      );
+
+      let cell = $(`<div class="input-cell"  id="row-${i}-col-${j}"></div>`);
 
       $(`#cell-row-${i}`).append(cell);
     }
   }
   $(".align-icon").click(function () {
     $(".align-icon.select").removeClass("select");
-    $(this).addClass(".select");
+    $(this).addClass("select");
   });
 
   $(".style-icon").click(function () {
@@ -55,12 +54,11 @@ $(document).ready(function () {
         let topCellSelected = $(`#row-${rowId - 1}-col-${colId}`).hasClass(
           "sel"
         );
-        console.log(rowId, colId, topCellSelected);
 
-        // if (topCellSelected) {
-        $(this).addClass("top-cell-selected");
-        $(`#row-${rowId - 1}-col-${colId}`).addClass("bottom-cell-selected");
-        // }
+        if (topCellSelected) {
+          $(this).addClass("top-cell-selected");
+          $(`#row-${rowId - 1}-col-${colId}`).addClass("bottom-cell-selected");
+        }
       }
       if (colId < 50) {
         let rightCellSelected = $(`#row-${rowId}-col-${colId + 1}`).hasClass(
@@ -68,17 +66,16 @@ $(document).ready(function () {
         );
         if (rightCellSelected) {
           $(this).addClass("right-cell-selected");
-          $(`row-${rowId}-col-${colId + 1}`).addClass("left-cell-selected");
+          $(`#row-${rowId}-col-${colId + 1}`).addClass("left-cell-selected");
         }
       }
       if (rowId < 50) {
         let bottomCellSelected = $(`#row-${rowId + 1}-col-${colId}`).hasClass(
           "sel"
         );
-        console.log(bottomCellSelected);
         if (bottomCellSelected) {
           $(this).addClass("bottom-cell-selected");
-          $(`row-${rowId + 1}-col-${colId}`).addClass("top-cell-selected");
+          $(`#row-${rowId + 1}-col-${colId}`).addClass("top-cell-selected");
         }
       }
       if (colId > 1) {
@@ -87,12 +84,16 @@ $(document).ready(function () {
         );
         if (leftCellSelected) {
           $(this).addClass("left-cell-selected");
-          $(`row-${rowId}-col-${colId - 1}`).addClass("right-cell-selected");
+          $(`#row-${rowId}-col-${colId - 1}`).addClass("right-cell-selected");
         }
       }
     } else {
       $(".input-cell.sel").removeClass("sel");
       $(this).addClass("sel");
+      let [rowId, colId] = getRowCol(this);
+      console.log(rowId, colId);
+      console.log($(this).attr("id"));
+      console.log($(`#row-${rowId}-col-${colId}`).hasClass("sel"));
     }
   });
 
@@ -102,10 +103,12 @@ $(document).ready(function () {
     $(this).attr("contenteditable", "true");
     $(this).focus();
   });
+
   $(".input-cell-container").scroll(function () {
     $(".column-name-container").scrollLeft(this.scrollLeft);
     $(".row-name-container").scrollTop(this.scrollTop);
   });
+  $(this).addClass("sel");
 });
 
 function getRowCol(ele) {
