@@ -39,16 +39,61 @@ $(document).ready(function () {
   }
   $(".align-icon").click(function () {
     $(".align-icon.select").removeClass("select");
-    $(this).addClass("select");
+    $(this).addClass(".select");
   });
 
   $(".style-icon").click(function () {
     $(this).toggleClass("select");
   });
 
-  $(".input-cell").click(function () {
-    $(".input-cell.sel").removeClass("sel");
-    $(this).addClass("sel");
+  $(".input-cell").click(function (e) {
+    if (e.ctrlKey) {
+      $(this).addClass("sel");
+      let [rowId, colId] = getRowCol(this);
+
+      if (rowId > 1) {
+        let topCellSelected = $(`#row-${rowId - 1}-col-${colId}`).hasClass(
+          "sel"
+        );
+        console.log(rowId, colId, topCellSelected);
+
+        // if (topCellSelected) {
+        $(this).addClass("top-cell-selected");
+        $(`#row-${rowId - 1}-col-${colId}`).addClass("bottom-cell-selected");
+        // }
+      }
+      if (colId < 50) {
+        let rightCellSelected = $(`#row-${rowId}-col-${colId + 1}`).hasClass(
+          "sel"
+        );
+        if (rightCellSelected) {
+          $(this).addClass("right-cell-selected");
+          $(`row-${rowId}-col-${colId + 1}`).addClass("left-cell-selected");
+        }
+      }
+      if (rowId < 50) {
+        let bottomCellSelected = $(`#row-${rowId + 1}-col-${colId}`).hasClass(
+          "sel"
+        );
+        console.log(bottomCellSelected);
+        if (bottomCellSelected) {
+          $(this).addClass("bottom-cell-selected");
+          $(`row-${rowId + 1}-col-${colId}`).addClass("top-cell-selected");
+        }
+      }
+      if (colId > 1) {
+        let leftCellSelected = $(`#row-${rowId}-col-${colId - 1}`).hasClass(
+          "sel"
+        );
+        if (leftCellSelected) {
+          $(this).addClass("left-cell-selected");
+          $(`row-${rowId}-col-${colId - 1}`).addClass("right-cell-selected");
+        }
+      }
+    } else {
+      $(".input-cell.sel").removeClass("sel");
+      $(this).addClass("sel");
+    }
   });
 
   $(".input-cell").dblclick(function () {
@@ -57,4 +102,16 @@ $(document).ready(function () {
     $(this).attr("contenteditable", "true");
     $(this).focus();
   });
+  $(".input-cell-container").scroll(function () {
+    $(".column-name-container").scrollLeft(this.scrollLeft);
+    $(".row-name-container").scrollTop(this.scrollTop);
+  });
 });
+
+function getRowCol(ele) {
+  let idArray = $(ele).attr("id").split("-");
+  console.log(idArray);
+  let rowId = parseInt(idArray[1]);
+  let colId = parseInt(idArray[3]);
+  return [rowId, colId];
+}

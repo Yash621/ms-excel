@@ -74,7 +74,7 @@ body {
   font-size: 18px;
 }
 .size-selector {
-  height: 28px;
+  height: 33px;
   width: 55px;
   font-size: 15px;
 }
@@ -93,7 +93,6 @@ body {
   display: flex;
   flex-wrap: wrap;
   overflow: hidden;
-  overflow: auto;
 }
 
 .select-all {
@@ -107,17 +106,20 @@ body {
   border: 1px solid lightgray;
   display: flex;
   align-items: center;
+  overflow: hidden;
 }
 .row-name-container {
   width: 37px;
   height: calc(71vh - 30px);
   border: 1px solid lightgray;
+  overflow: hidden;
 }
 
 .input-cell-container {
   width: calc(100% - 37px);
   height: calc(71vh - 30px);
   border: 1px solid lightgray;
+  overflow: auto;
 }
 .icon-left-scroll,
 .icon-right-scroll {
@@ -210,5 +212,18 @@ body {
   background-color: lightgray;
 }
 .sel {
-  border: 2px solid #107d40;
+  border: 3px solid #107d40;
+}
+
+.input-cell.top-cell-selected {
+  border-top: 3px solid red;
+}
+.input-cell.bottom-cell-selected {
+  border-bottom: 1px solid lightgray;
+}
+.input-cell.left-cell-selected {
+  border-left: 1px solid lightgray;
+}
+.input-cell.right-cell-selected {
+  border-right: 1px solid lightgray;
 }
