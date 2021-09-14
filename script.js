@@ -1,3 +1,22 @@
+let defaultProperties = {
+  text: "",
+  "font-weight": "",
+  "font-style": "",
+  "text-decoration": "",
+  "text-align": "left",
+  "background-color": "",
+  color: "black",
+  "font-family": "Noto Sans",
+  "font-size": "",
+};
+
+let cellData = {
+  Sheet1: {},
+};
+
+let selectedSheet = "Sheet1";
+let totalSheets = 1;
+
 $(document).ready(function () {
   let cellContainer = $(".input-cell-container");
 
@@ -138,23 +157,23 @@ $(document).ready(function () {
 
   $(".icon-bold").click(function () {
     if ($(this).hasClass("select")) {
-      updateCell("font-weight", "bold");
+      updateCell("font-weight", "bold", false);
     } else {
-      updateCell("font-weight", "");
+      updateCell("font-weight", "", true);
     }
   });
   $(".icon-italic").click(function () {
     if ($(this).hasClass("select")) {
-      updateCell("font-style", "italic");
+      updateCell("font-style", "italic", false);
     } else {
-      updateCell("font-style", "");
+      updateCell("font-style", "", true);
     }
   });
   $(".icon-underline").click(function () {
     if ($(this).hasClass("select")) {
-      updateCell("text-decoration", "underline");
+      updateCell("text-decoration", "underline", false);
     } else {
-      updateCell("text-decoration", "");
+      updateCell("text-decoration", "", true);
     }
   });
 });
@@ -166,8 +185,32 @@ function getRowCol(ele) {
   let colId = parseInt(idArray[3]);
   return [rowId, colId];
 }
-function updateCell(property, value) {
+function updateCell(property, value, defaultPossibe) {
   $(".input-cell.sel").each(function () {
     $(this).css(property, value);
+    let [rowId, colId] = getRowCol(this);
+    if (cellData[selectedSheet][rowId]) {
+      if (cellData[selectedSheet][colId]) {
+        cellData[selectedSheet][rowId][colId][property] = value;
+      } else {
+        cellData[selectedSheet][rowId][colId] = { ...defaultProperties };
+        cellData[selectedSheet][rowId][colId][property] = value;
+      }
+    } else {
+      cellData[selectedSheet][rowId] = {};
+      cellData[selectedSheet][rowId][colId] = { ...defaultProperties };
+      cellData[selectedSheet][rowId][colId][property] = value;
+    }
+    if (
+      defaultPossibe &&
+      JSON.stringify(cellData[selectedSheet][rowId][colId]) ===
+        JSON.stringify(defaultProperties)
+    ) {
+      delete cellData[selectedSheet][rowId][col];
+      if (Object.keys(cellData[selectedSheet][rowId].length) == 0) {
+        delete cellData[selectedSheet][rowId];
+      }
+    }
+    console.log(cellData);
   });
 }
