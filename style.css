@@ -69,6 +69,7 @@ body {
 .font-family-selector {
   position: relative;
   font-size: 15px;
+  font-style: "Noto Sans";
 }
 .selector option {
   font-size: 18px;
@@ -140,7 +141,6 @@ body {
   margin-bottom: 0.3%;
   padding: 1%;
   cursor: pointer;
-  border-bottom: 3px solid #107d40;
   padding-bottom: 0.5%;
 }
 .sheet-tab-container:hover {

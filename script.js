@@ -184,15 +184,19 @@ $(document).ready(function () {
 
     let alignment = cellInfo["text-align"];
     $(".align-icon.select").removeClass("select");
-    console.log(alignment);
     $(".align-icon-" + alignment).addClass("select");
     $(".color-picker").val(cellInfo["background-color"]);
-    console.log(cellInfo["background-color"]);
     $(".color-picker-text").val(cellInfo["color"]);
+    $(".font-family-selector").val(cellInfo["font-family"]);
+    let size = cellInfo["font-size"].split("p");
+    $(".font-family-selector").css("font-family", cellInfo["font-family "]);
+    $(".size-selector").val(size[0]);
   }
 
   $(".input-cell").blur(function () {
     $(".input-cell.sel").attr("contenteditable", "false");
+    updateCell("text", $(this).text());
+    console.log("kjf");
   });
 
   $(".input-cell-container").scroll(function () {
@@ -234,6 +238,34 @@ $(document).ready(function () {
   $(".color-picker-text").change(function (e) {
     updateCell("color", $(this).val());
   });
+  $(".font-family-selector").change(function (e) {
+    $(".font-family-selector").css("font-family", $(this).val());
+    updateCell("font-family", $(this).val());
+  });
+  $(".size-selector").change(function (e) {
+    updateCell("font-size", $(this).val() + "px");
+  });
+  $(".icon-add").click(function (e) {
+    emptySheet();
+    $(".sheet-tab-container.selected").removeClass("selected");
+    let sheetName = "Sheet" + totalSheets + 1;
+    cellData[sheetName] = {};
+    totalSheets += 1;
+    selectedSheet = sheetName;
+    $(
+      ".sheet-bar"
+    ).append(`<div class="sheet-tab-container selected" id=${totalSheets}>
+    <div class="sheet-tab">Sheet ${totalSheets}</div>
+       </div>`);
+  });
+  $(".sheet-tab-container").click(function (e) {
+    selectedSheet = "Sheet" + $(this).attr("id");
+    $(".sheet-tab-container.selected").removeClass("selected");
+    $(this).addClass("selected");
+    loadSheet();
+    console.log(selectedSheet);
+    console.log("jkjf");
+  });
 });
 
 function getRowCol(ele) {
@@ -271,5 +303,46 @@ function updateCell(property, value, defaultPossibe) {
         }
       }
     }
+    console.log(cellData[selectedSheet][rowId][colId]);
   });
+}
+
+function emptySheet() {
+  let sheetInfo = cellData[selectedSheet];
+  for (let i of Object.keys(sheetInfo)) {
+    for (let j of Object.keys(sheetInfo[i])) {
+      $(`#row-${i}-col-${j}`).text("");
+      $(`#row-${i}-col-${j}`).css("background-color", "#ffffff");
+      $(`#row-${i}-col-${j}`).css("color", "#000000");
+      $(`#row-${i}-col-${j}`).css("font-weight", "");
+      $(`#row-${i}-col-${j}`).css("font-style", "");
+      $(`#row-${i}-col-${j}`).css("text-align", "left");
+      $(`#row-${i}-col-${j}`).css("text-decoration", "");
+      $(`#row-${i}-col-${j}`).css("font-size", "14");
+      $(`#row-${i}-col-${j}`).css("font-family", "Noto Sans");
+    }
+  }
+}
+function loadSheet() {
+  let sheetInfo = cellData[selectedSheet];
+  for (let i of Object.keys(sheetInfo)) {
+    for (let j of Object.keys(sheetInfo[i])) {
+      let cellInfo = cellData[i][j];
+      $(`#row-${i}-col-${j}`).text(cellInfo["text"]);
+      $(`#row-${i}-col-${j}`).css(
+        "background-color",
+        cellInfo["background-color"]
+      );
+      $(`#row-${i}-col-${j}`).css("color", cellInfo["color"]);
+      $(`#row-${i}-col-${j}`).css("font-weight", cellInfo["font-weight"]);
+      $(`#row-${i}-col-${j}`).css("font-style", cellInfo["font-style"]);
+      $(`#row-${i}-col-${j}`).css("text-align", cellInfo["text-align"]);
+      $(`#row-${i}-col-${j}`).css(
+        "text-decoration",
+        cellInfo["text-decoration"]
+      );
+      $(`#row-${i}-col-${j}`).css("font-size", cellInfo["font-size"]);
+      $(`#row-${i}-col-${j}`).css("font-family", cellInfo["font-family"]);
+    }
+  }
 }
