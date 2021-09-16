@@ -74,7 +74,7 @@ body {
   font-size: 18px;
 }
 .size-selector {
-  height: 31px;
+  height: 27px;
   width: 55px;
   font-size: 15px;
 }
@@ -147,7 +147,7 @@ body {
   background-color: #e5e4e2;
 }
 .column-name {
-  min-width: 46.0005px;
+  min-width: 49.73px;
   height: 27px;
   display: flex;
   align-items: center;

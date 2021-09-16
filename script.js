@@ -218,6 +218,12 @@ $(document).ready(function () {
       updateCell("text-decoration", "", true);
     }
   });
+  $(".color-fill-icon").click(function (e) {
+    $(".color-picker").click();
+  });
+  $(".color-fill-icon-text").click(function (e) {
+    $(".color-picker-text").click();
+  });
 });
 
 function getRowCol(ele) {
