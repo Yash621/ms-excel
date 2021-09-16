@@ -4,10 +4,10 @@ let defaultProperties = {
   "font-style": "",
   "text-decoration": "",
   "text-align": "left",
-  "background-color": "",
+  "background-color": "#ffffff",
   color: "black",
   "font-family": "Noto Sans",
-  "font-size": "",
+  "font-size": "14",
 };
 
 let cellData = {
@@ -186,6 +186,9 @@ $(document).ready(function () {
     $(".align-icon.select").removeClass("select");
     console.log(alignment);
     $(".align-icon-" + alignment).addClass("select");
+    $(".color-picker").val(cellInfo["background-color"]);
+    console.log(cellInfo["background-color"]);
+    $(".color-picker-text").val(cellInfo["color"]);
   }
 
   $(".input-cell").blur(function () {
@@ -224,6 +227,13 @@ $(document).ready(function () {
   $(".color-fill-icon-text").click(function (e) {
     $(".color-picker-text").click();
   });
+  $(".color-picker").change(function (e) {
+    updateCell("background-color", $(this).val());
+  });
+
+  $(".color-picker-text").change(function (e) {
+    updateCell("color", $(this).val());
+  });
 });
 
 function getRowCol(ele) {
@@ -237,7 +247,7 @@ function updateCell(property, value, defaultPossibe) {
     $(this).css(property, value);
     let [rowId, colId] = getRowCol(this);
     if (cellData[selectedSheet][rowId]) {
-      if (cellData[selectedSheet][colId]) {
+      if (cellData[selectedSheet][rowId][colId]) {
         cellData[selectedSheet][rowId][colId][property] = value;
       } else {
         cellData[selectedSheet][rowId][colId] = { ...defaultProperties };
@@ -247,6 +257,7 @@ function updateCell(property, value, defaultPossibe) {
       cellData[selectedSheet][rowId] = {};
       cellData[selectedSheet][rowId][colId] = { ...defaultProperties };
       cellData[selectedSheet][rowId][colId][property] = value;
+      console.log(cellData[selectedSheet][rowId][colId]);
     }
     if (
       defaultPossibe &&
@@ -260,6 +271,5 @@ function updateCell(property, value, defaultPossibe) {
         }
       }
     }
-    console.log(cellData);
   });
 }
