@@ -248,23 +248,45 @@ $(document).ready(function () {
   $(".icon-add").click(function (e) {
     emptySheet();
     $(".sheet-tab-container.selected").removeClass("selected");
-    let sheetName = "Sheet" + totalSheets + 1;
+    let sheetName = "Sheet" + (totalSheets + 1);
     cellData[sheetName] = {};
     totalSheets += 1;
     selectedSheet = sheetName;
     $(
       ".sheet-bar"
     ).append(`<div class="sheet-tab-container selected" id=${totalSheets}>
-    <div class="sheet-tab">Sheet ${totalSheets}</div>
+    <div class="sheet-tab">Sheet${totalSheets}</div>
        </div>`);
+    $(".sheet-tab-container.selected").click(function () {
+      $(".sheet-tab-container.selected").removeClass("selected");
+      $(this).addClass("selected");
+      // emptySheet();
+      selectedSheet = $(this).text();
+      console.log(selectedSheet);
+      // loadSheet();
+    });
   });
-  $(".sheet-tab-container").click(function (e) {
-    selectedSheet = "Sheet" + $(this).attr("id");
+  $(".sheet-tab-container").click(function () {
     $(".sheet-tab-container.selected").removeClass("selected");
     $(this).addClass("selected");
-    loadSheet();
+    emptySheet();
+    let s = 0;
+    let e = $(this).text().length - 1;
+    while (true) {
+      $(this).text().charAt(s) !== " " ? s++ : s;
+      $(this).text().charAt(e) !== " " ? e-- : e;
+      if (
+        $(this).text().charAt(s) !== " " &&
+        $(this).text().charAt(e) !== " "
+      ) {
+        break;
+      }
+    }
+
+    selectedSheet = $(this).text().substring(11, 17);
     console.log(selectedSheet);
-    console.log("jkjf");
+    console.log("kjfkj");
+    // loadSheet();
   });
 });
 
@@ -309,6 +331,7 @@ function updateCell(property, value, defaultPossibe) {
 
 function emptySheet() {
   let sheetInfo = cellData[selectedSheet];
+  console.log(cellData);
   for (let i of Object.keys(sheetInfo)) {
     for (let j of Object.keys(sheetInfo[i])) {
       $(`#row-${i}-col-${j}`).text("");
@@ -325,6 +348,7 @@ function emptySheet() {
 }
 function loadSheet() {
   let sheetInfo = cellData[selectedSheet];
+  console.log(selectedSheet);
   for (let i of Object.keys(sheetInfo)) {
     for (let j of Object.keys(sheetInfo[i])) {
       let cellInfo = cellData[i][j];
