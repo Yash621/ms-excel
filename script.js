@@ -260,33 +260,18 @@ $(document).ready(function () {
     $(".sheet-tab-container.selected").click(function () {
       $(".sheet-tab-container.selected").removeClass("selected");
       $(this).addClass("selected");
-      // emptySheet();
-      selectedSheet = $(this).text();
+      emptySheet();
+      selectedSheet = $(this).text().trim();
       console.log(selectedSheet);
-      // loadSheet();
+      loadSheet();
     });
   });
   $(".sheet-tab-container").click(function () {
     $(".sheet-tab-container.selected").removeClass("selected");
     $(this).addClass("selected");
     emptySheet();
-    let s = 0;
-    let e = $(this).text().length - 1;
-    while (true) {
-      $(this).text().charAt(s) !== " " ? s++ : s;
-      $(this).text().charAt(e) !== " " ? e-- : e;
-      if (
-        $(this).text().charAt(s) !== " " &&
-        $(this).text().charAt(e) !== " "
-      ) {
-        break;
-      }
-    }
-
-    selectedSheet = $(this).text().substring(11, 17);
-    console.log(selectedSheet);
-    console.log("kjfkj");
-    // loadSheet();
+    selectedSheet = $(this).text().trim();
+    loadSheet();
   });
 });
 
@@ -348,10 +333,10 @@ function emptySheet() {
 }
 function loadSheet() {
   let sheetInfo = cellData[selectedSheet];
-  console.log(selectedSheet);
+  console.log(sheetInfo);
   for (let i of Object.keys(sheetInfo)) {
     for (let j of Object.keys(sheetInfo[i])) {
-      let cellInfo = cellData[i][j];
+      let cellInfo = sheetInfo[i][j];
       $(`#row-${i}-col-${j}`).text(cellInfo["text"]);
       $(`#row-${i}-col-${j}`).css(
         "background-color",

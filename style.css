@@ -256,3 +256,12 @@ body {
 .icon-color-text {
   display: flex;
 }
+.sheet-options {
+  position: absolute;
+  bottom: 4vh;
+  background-color: red;
+  height: 40px;
+  width: 60px;
+  top: 87.5%;
+  left: 10%;
+}
