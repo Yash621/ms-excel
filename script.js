@@ -196,7 +196,6 @@ $(document).ready(function () {
   $(".input-cell").blur(function () {
     $(".input-cell.sel").attr("contenteditable", "false");
     updateCell("text", $(this).text());
-    console.log("kjf");
   });
 
   $(".input-cell-container").scroll(function () {
@@ -265,6 +264,7 @@ $(document).ready(function () {
       console.log(selectedSheet);
       loadSheet();
     });
+    addSheetEvents();
   });
   $(".sheet-tab-container").click(function () {
     $(".sheet-tab-container.selected").removeClass("selected");
@@ -272,6 +272,22 @@ $(document).ready(function () {
     emptySheet();
     selectedSheet = $(this).text().trim();
     loadSheet();
+    addSheetEvents();
+  });
+  function addSheetEvents() {
+    $(".sheet-tab-container.selected").contextmenu(function (e) {
+      e.preventDefault();
+      if ($(".sheet-options").length == 0) {
+        $(".container").append(`<div class="sheet-options">
+        <div class="sheet-rename">Rename</div>
+        <div class="sheet-delete">Delete</div>
+        </div>`);
+      }
+      $(".sheet-options").css("left", e.pageX + "px");
+    });
+  }
+  $(".container").click(function (e) {
+    $(".sheet-options").remove();
   });
 });
 
@@ -331,9 +347,9 @@ function emptySheet() {
     }
   }
 }
+
 function loadSheet() {
   let sheetInfo = cellData[selectedSheet];
-  console.log(sheetInfo);
   for (let i of Object.keys(sheetInfo)) {
     for (let j of Object.keys(sheetInfo[i])) {
       let cellInfo = sheetInfo[i][j];

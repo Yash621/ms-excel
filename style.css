@@ -258,10 +258,37 @@ body {
 }
 .sheet-options {
   position: absolute;
-  bottom: 4vh;
-  background-color: red;
-  height: 40px;
-  width: 60px;
-  top: 87.5%;
+  background-color: white;
+  height: 80px;
+  width: 80px;
+  top: 83%;
   left: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+  box-shadow: 5px 5px 8px lightgray;
+}
+.sheet-rename:hover {
+  background-color: lightgray;
+}
+.sheet-rename {
+  padding: 10px;
+  width: 75px;
+  text-align: center;
+}
+.sheet-delete {
+  padding: 10px;
+  width: 80px;
+  text-align: center;
+}
+
+.sheet-delete:hover {
+  background-color: lightgray;
+}
+.sheet-rename-modal {
+  background-color: red;
+  height: 100%;
+  width: 100%;
 }
