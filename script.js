@@ -277,6 +277,9 @@ $(document).ready(function () {
   function addSheetEvents() {
     $(".sheet-tab-container.selected").contextmenu(function (e) {
       e.preventDefault();
+      $(".sheet-tab-container.selected").removeClass("selected");
+      $(this).addClass("selected");
+      selectedSheet = $(this).text().trim();
       if ($(".sheet-options").length == 0) {
         $(".container").append(`<div class="sheet-options">
         <div class="sheet-rename">Rename</div>
@@ -301,19 +304,21 @@ $(document).ready(function () {
           $(".sheet-rename-modal").remove();
           $(".layer").remove();
         });
+        $(".submit-button").click(function () {
+          console.log("kjkfd");
+          let newSheetName = $(".new-sheet-name").val();
+          $(".sheet-tab-container.selected").text(newSheetName);
+          cellData[newSheetName] = cellData[selectedSheet];
+          delete cellData[selectedSheet];
+          selectedSheet = newSheetName;
+          $(".sheet-rename-modal").remove();
+          $(".layer").remove();
+        });
       });
     });
   }
   $(".container").click(function (e) {
     $(".sheet-options").remove();
-  });
-  $(".submit-button").click(function (e) {
-    let newSheetName = $(".new-sheet-name").val();
-    $(".sheet-tab-container").text(newSheetName);
-    cellData[newSheetName] = cellData[selectedSheet];
-    delete cellData[selectedSheet];
-    selectedSheet = newSheetName;
-    $(".sheet-rename-modal").remove();
   });
 });
 
