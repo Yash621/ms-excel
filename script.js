@@ -284,6 +284,22 @@ $(document).ready(function () {
         </div>`);
       }
       $(".sheet-options").css("left", e.pageX + "px");
+      $(".sheet-rename").click(function (e) {
+        $(".container").css("background-color", "#989899");
+        $(".container").append(`
+        <div class="sheet-rename-modal">
+        <h2 class="head">Rename Sheet</h2>
+        <h4 class="sechead">Rename sheet to:</h4>
+        <input type="text" class="new-sheet-name" placeholder="Sheet Name" />
+        <div class="buttons">
+          <div class="submit-button">OK</div>
+          <div class="cancel-button">Cancel</div>
+        </div>
+      </div>`);
+        $(".cancel-button").click(function () {
+          $(".sheet-rename-modal").remove();
+        });
+      });
     });
   }
   $(".container").click(function (e) {
