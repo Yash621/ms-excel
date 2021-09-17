@@ -307,6 +307,13 @@ $(document).ready(function () {
   $(".container").click(function (e) {
     $(".sheet-options").remove();
   });
+  $(".submit-button").click(function (e) {
+    let newSheetName = $(".new-sheet-name").val();
+    $(".sheet-tab-container").text(newSheetName);
+    cellData[newSheetName] = cellData[selectedSheet];
+    delete cellData[selectedSheet];
+    selectedSheet = newSheetName;
+  });
 });
 
 function getRowCol(ele) {
