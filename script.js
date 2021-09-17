@@ -313,6 +313,7 @@ $(document).ready(function () {
     cellData[newSheetName] = cellData[selectedSheet];
     delete cellData[selectedSheet];
     selectedSheet = newSheetName;
+    $(".sheet-rename-modal").remove();
   });
 });
 
