@@ -295,9 +295,11 @@ $(document).ready(function () {
           <div class="submit-button">OK</div>
           <div class="cancel-button">Cancel</div>
         </div>
-      </div>`);
+      </div>
+      <div class="layer"></div>`);
         $(".cancel-button").click(function () {
           $(".sheet-rename-modal").remove();
+          $(".layer").remove();
         });
       });
     });
