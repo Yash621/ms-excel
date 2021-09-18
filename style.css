@@ -365,3 +365,11 @@ body {
   height: 100%;
   z-index: 1;
 }
+.del-text {
+  color: #717170;
+}
+.del-head {
+  color: #107c41;
+  top: 12%;
+  position: absolute;
+}

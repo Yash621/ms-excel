@@ -290,7 +290,6 @@ $(document).ready(function () {
       }
       $(".sheet-options").css("left", e.pageX + "px");
       $(".sheet-rename").click(function (e) {
-        $(".container").css("background-color", "#989899");
         $(".container").append(`
         <div class="sheet-rename-modal">
         <h2 class="head">Rename Sheet</h2>
@@ -325,16 +324,37 @@ $(document).ready(function () {
       });
       $(".sheet-delete").click(function (e) {
         if (Object.keys(cellData).length > 1) {
-          let currentSheetName = selectedSheet;
-          let sheet = $(".sheet-tab-container.selected");
-          let currentSheetIndex = Object.keys(cellData).indexOf(selectedSheet);
-          if (currentSheetIndex == 0) {
-            $(".sheet-tab-container.selected").next().click();
-          } else {
-            $(".sheet-tab-container.selected").prev().click();
-          }
-          sheet.remove();
-          delete cellData[currentSheetName];
+          $(".container").append(`  <div class="sheet-rename-modal">
+          <h2 class="del-head">Delete Sheet</h2>
+          <p class="del-text">
+            You can't undo deleting sheets, and you might be removing some data.
+            If you still want to delete this sheet, click OK.
+          </p>
+          <div class="buttons">
+            <div class="submit-button">OK</div>
+            <div class="cancel-button">Cancel</div>
+          </div>
+        </div>
+        <div class="layer"></div>`);
+          $(".cancel-button").click(function () {
+            $(".sheet-rename-modal").remove();
+            $(".layer").remove();
+          });
+          $(".submit-button").click(function () {
+            let currentSheetName = selectedSheet;
+            let sheet = $(".sheet-tab-container.selected");
+            let currentSheetIndex =
+              Object.keys(cellData).indexOf(selectedSheet);
+            if (currentSheetIndex == 0) {
+              $(".sheet-tab-container.selected").next().click();
+            } else {
+              $(".sheet-tab-container.selected").prev().click();
+            }
+            sheet.remove();
+            delete cellData[currentSheetName];
+            $(".sheet-rename-modal").remove();
+            $(".layer").remove();
+          });
         } else {
           alert(
             "Sorry,there is only one sheet. So, it's not possible to delete sheet !! "
