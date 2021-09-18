@@ -386,20 +386,24 @@ $(document).ready(function () {
         };
       } else {
         cellData[selectedSheet][newRowId] = {};
+        console.log(cellData[selectedSheet][cell[0]][cell[1]]);
         cellData[selectedSheet][newRowId][newColId] = {
           ...cellData[selectedSheet][cell[0]][cell[1]],
         };
       }
       if (cut) {
         delete cellData[selectedSheet][cell[0]][cell[1]];
-        console.log(cellData);
         if (Object.keys(cellData[selectedSheet][cell[0]]).length == 0) {
           delete cellData[selectedSheet][cell[0]];
         }
-        cut = false;
-        selectedCells = [];
       }
     }
+
+    if (cut) {
+      cut = false;
+      selectedCells = [];
+    }
+
     loadSheet();
   });
 });
