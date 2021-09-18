@@ -279,7 +279,9 @@ $(document).ready(function () {
       e.preventDefault();
       $(".sheet-tab-container.selected").removeClass("selected");
       $(this).addClass("selected");
+      emptySheet();
       selectedSheet = $(this).text().trim();
+      loadSheet();
       if ($(".sheet-options").length == 0) {
         $(".container").append(`<div class="sheet-options">
         <div class="sheet-rename">Rename</div>
@@ -305,15 +307,39 @@ $(document).ready(function () {
           $(".layer").remove();
         });
         $(".submit-button").click(function () {
-          console.log("kjkfd");
           let newSheetName = $(".new-sheet-name").val();
           $(".sheet-tab-container.selected").text(newSheetName);
-          cellData[newSheetName] = cellData[selectedSheet];
-          delete cellData[selectedSheet];
+          let newCellData = {};
+          for (let key in cellData) {
+            if (key != selectedSheet) {
+              newCellData[key] = cellData[key];
+            } else {
+              newCellData[newSheetName] = cellData[key];
+            }
+          }
+          cellData = newCellData;
           selectedSheet = newSheetName;
           $(".sheet-rename-modal").remove();
           $(".layer").remove();
         });
+      });
+      $(".sheet-delete").click(function (e) {
+        if (Object.keys(cellData).length > 1) {
+          let currentSheetName = selectedSheet;
+          let sheet = $(".sheet-tab-container.selected");
+          let currentSheetIndex = Object.keys(cellData).indexOf(selectedSheet);
+          if (currentSheetIndex == 0) {
+            $(".sheet-tab-container.selected").next().click();
+          } else {
+            $(".sheet-tab-container.selected").prev().click();
+          }
+          sheet.remove();
+          delete cellData[currentSheetName];
+        } else {
+          alert(
+            "Sorry,there is only one sheet. So, it's not possible to delete sheet !! "
+          );
+        }
       });
     });
   }
