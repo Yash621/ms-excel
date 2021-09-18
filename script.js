@@ -346,6 +346,40 @@ $(document).ready(function () {
   $(".container").click(function (e) {
     $(".sheet-options").remove();
   });
+
+  $(".icon-right-scroll").click(function (e) {
+    console.log("jjfdkj");
+    if (Object.keys(cellData).indexOf(selectedSheet) != totalSheets - 1) {
+      $(".sheet-tab-container.selected").next().click();
+    }
+  });
+  $(".icon-left-scroll").click(function (e) {
+    if (Object.keys(cellData).indexOf(selectedSheet) != 0) {
+      $(".sheet-tab-container.selected").prev().click();
+    }
+  });
+  let selectedCells = [];
+  $(".icon-copy").click(function (e) {
+    $(".input-cell.sel").each(function () {
+      selectedCells.push(getRowCol(this));
+    });
+  });
+  $(".icon-paste").click(function (e) {
+    let [rowId, colId] = getRowCol($(".input-cell.sel")[0]);
+    let rowDistance = rowId - selectedCells[0][0];
+    let colDistance = colId - selectedCells[0][1];
+    for (let i of selectedCells) {
+      let newRowId = i[0] + rowDistance;
+      let newColId = i[1] + colDistance;
+      if (cellData[selectedSheet][newRowId - 1]) {
+        if (cellData[selectedSheet][newRowId - 1][newColId - 1]) {
+          cellData[selectedSheet][newRowId - 1][newColId - 1] = {
+            ...cellData[selectedSheet][RowId - 1][ColId - 1],
+          };
+        }
+      }
+    }
+  });
 });
 
 function getRowCol(ele) {
