@@ -364,21 +364,43 @@ $(document).ready(function () {
       selectedCells.push(getRowCol(this));
     });
   });
+  let cut = false;
+  $(".icon-cut").click(function (e) {
+    $(".input-cell.sel").each(function () {
+      selectedCells.push(getRowCol(this));
+    });
+    cut = true;
+  });
+
   $(".icon-paste").click(function (e) {
+    emptySheet();
     let [rowId, colId] = getRowCol($(".input-cell.sel")[0]);
     let rowDistance = rowId - selectedCells[0][0];
     let colDistance = colId - selectedCells[0][1];
-    for (let i of selectedCells) {
-      let newRowId = i[0] + rowDistance;
-      let newColId = i[1] + colDistance;
-      if (cellData[selectedSheet][newRowId - 1]) {
-        if (cellData[selectedSheet][newRowId - 1][newColId - 1]) {
-          cellData[selectedSheet][newRowId - 1][newColId - 1] = {
-            ...cellData[selectedSheet][RowId - 1][ColId - 1],
-          };
+    for (let cell of selectedCells) {
+      let newRowId = cell[0] + rowDistance;
+      let newColId = cell[1] + colDistance;
+      if (cellData[selectedSheet][newRowId]) {
+        cellData[selectedSheet][newRowId][newColId] = {
+          ...cellData[selectedSheet][cell[0]][cell[1]],
+        };
+      } else {
+        cellData[selectedSheet][newRowId] = {};
+        cellData[selectedSheet][newRowId][newColId] = {
+          ...cellData[selectedSheet][cell[0]][cell[1]],
+        };
+      }
+      if (cut) {
+        delete cellData[selectedSheet][cell[0]][cell[1]];
+        console.log(cellData);
+        if (Object.keys(cellData[selectedSheet][cell[0]]).length == 0) {
+          delete cellData[selectedSheet][cell[0]];
         }
+        cut = false;
+        selectedCells = [];
       }
     }
+    loadSheet();
   });
 });
 
@@ -423,7 +445,6 @@ function updateCell(property, value, defaultPossibe) {
 
 function emptySheet() {
   let sheetInfo = cellData[selectedSheet];
-  console.log(cellData);
   for (let i of Object.keys(sheetInfo)) {
     for (let j of Object.keys(sheetInfo[i])) {
       $(`#row-${i}-col-${j}`).text("");
