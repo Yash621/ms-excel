@@ -35,6 +35,7 @@ $ live-server
 
 # The server will start at <http://localhost:5500>
 ```
+&#xa0;
 
 Made with :heart: by <a href="https://github.com/yash621" target="_blank">Yash Goel</a>
 
