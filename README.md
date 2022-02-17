@@ -11,6 +11,7 @@ A Ms-excel clone built by just using HTML,CSS,JS and Jquery
 - Cell coloring and Text Aligning
 - Cut, Copy, Pasting of data in different cells and sheets
 - Expression Calcuation through Excel formulas
+- Multiple Cell Formatting at the same time
 
 ## :eyes: [Preview]
 
