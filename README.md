@@ -1,6 +1,6 @@
 # ms-excel
 
-A Ms-excel clone built by just using HTML, CSS, JS and Jquery
+A Ms-Excel clone built by just using HTML, CSS, JS and Jquery
 
 <br>
 
