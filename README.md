@@ -1,4 +1,4 @@
-# ms-excel
+# Ms-Excel
 
 A Ms-Excel clone built by just using HTML, CSS, JS and Jquery
 
