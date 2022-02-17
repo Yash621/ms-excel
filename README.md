@@ -13,7 +13,7 @@ A Ms-Excel clone built by just using HTML, CSS, JS and Jquery
 - Expression Calcuation through Excel formulas
 - Multiple Cell Formatting at the same time
 
-## :eyes: [Preview]
+## :eyes: Preview
 
 ![ms-excel clone preview](https://github.com/Yash621/ms-excel/blob/master/preview.gif)
 
