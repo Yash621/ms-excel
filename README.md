@@ -2,7 +2,6 @@
 
 A Ms-Excel clone built by just using HTML, CSS, JS and Jquery
 
-<br>
 
 ## :sparkles: Features
 
