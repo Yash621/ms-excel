@@ -1,6 +1,6 @@
 # ms-excel
 
-A Ms-excel clone built by just using HTML,CSS,JS and Jquery
+A Ms-excel clone built by just using HTML, CSS, JS and Jquery
 
 <br>
 
@@ -8,7 +8,7 @@ A Ms-excel clone built by just using HTML,CSS,JS and Jquery
 
 - Create, Update, Delete Excel sheets
 - Bold, Italic, Font-Changing of text 
-- Cell coloring and Text Aligning
+- Cell and Text coloring and Text Aligning
 - Cut, Copy, Pasting of data in different cells and sheets
 - Expression Calcuation through Excel formulas
 - Multiple Cell Formatting at the same time
@@ -33,7 +33,7 @@ $ npm install -g live-server
 # Run server
 $ live-server
 
-# The server will start at <http://localhost:3000>
+# The server will start at <http://localhost:5500>
 ```
 
 Made with :heart: by <a href="https://github.com/yash621" target="_blank">Yash Goel</a>
